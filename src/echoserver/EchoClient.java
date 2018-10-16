@@ -2,7 +2,6 @@ package echoserver;
 
 import java.io.*;
 import java.net.*;
-import java.util.*;
 
 public class EchoClient {
 
@@ -18,16 +17,15 @@ public class EchoClient {
     }
 
     try {
-
       Socket socket = new Socket(server, portNumber);
-      InputStream response = socket.getInputStream();
       OutputStream userIn = socket.getOutputStream();
+      InputStream response = socket.getInputStream();
 
-      byte systemInByte;
-      while((systemInByte = System.in.read()) != -1) {
-        userIn.write(systemInByte);
-        byte serverResponseByte = response.read();
-        System.out.println(serverResponseByte);
+      int systemIn;
+      while((systemIn = System.in.read()) != -1) {
+        userIn.write(systemIn);
+        int serverResponse = response.read();
+        System.out.write(serverResponse);
       }
 
       socket.shutdownOutput();
